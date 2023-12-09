@@ -30,3 +30,15 @@ def edit_musician(request, musician_id):
     else:
         form = MusicianForm(instance=musician)
     return render(request, "edit_musician.html", {"form": form, "musician": musician})
+
+
+def edit_album(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    if request.method == "POST":
+        form = AlbumForm(request.POST, instance=album)
+        if form.is_valid():
+            form.save()
+            return redirect("album_list")
+    else:
+        form = AlbumForm(instance=album)
+    return render(request, "edit_album.html", {"form": form, "album": album})
