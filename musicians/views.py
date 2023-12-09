@@ -18,3 +18,15 @@ def musician_list(request):
 def album_list(request):
     albums = Album.objects.all()
     return render(request, "album_list.html", {"albums": albums})
+
+
+def edit_musician(request, musician_id):
+    musician = get_object_or_404(Musician, pk=musician_id)
+    if request.method == "POST":
+        form = MusicianForm(request.POST, instance=musician)
+        if form.is_valid():
+            form.save()
+            return redirect("musician_list")
+    else:
+        form = MusicianForm(instance=musician)
+    return render(request, "edit_musician.html", {"form": form, "musician": musician})
