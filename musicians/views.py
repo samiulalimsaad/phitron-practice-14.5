@@ -70,3 +70,9 @@ def edit_album(request, album_id):
     else:
         form = AlbumForm(instance=album)
     return render(request, "edit_album.html", {"form": form, "album": album})
+
+
+def delete_album(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    album.delete()
+    return redirect("album_list")
