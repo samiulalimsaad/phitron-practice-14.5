@@ -17,6 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from musicians.views import album_list, edit_album, edit_musician, index, musician_list
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("", index, name="index"),
+    path("musicians/", musician_list, name="musician_list"),
+    path("albums/", album_list, name="album_list"),
+    path("edit/musician/<int:musician_id>/", edit_musician, name="edit_musician"),
+    path("edit/album/<int:album_id>/", edit_album, name="edit_album"),
 ]
