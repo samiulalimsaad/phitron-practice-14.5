@@ -26,6 +26,17 @@ def musician_list(request):
     return render(request, "musician_list.html", {"musicians": musicians})
 
 
+def add_album(request):
+    if request.method == "POST":
+        form = AlbumForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("album_list")
+    else:
+        form = AlbumForm()
+    return render(request, "add_album.html", {"form": form})
+
+
 def album_list(request):
     albums = Album.objects.all()
     return render(request, "album_list.html", {"albums": albums})
