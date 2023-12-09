@@ -1,6 +1,12 @@
 {% extends 'base.html' %} {% block title %}Musicians List{% endblock title %}
 {%block content %}
 <h1 class="text-3xl font-bold mb-8">Musicians</h1>
+<a
+    href="{% url 'add_musician' %}"
+    class="bg-blue-500 text-white p-2 mb-4 inline-block"
+    >Add Musician</a
+>
+
 <table class="min-w-full bg-white border border-gray-300">
     <!-- Table Headers -->
     <thead>
@@ -29,6 +35,11 @@
                     href="{% url 'edit_musician' musician.id %}"
                     class="text-blue-500"
                     >Edit</a
+                >
+                <a
+                    href="{% url 'delete_musician' musician.id %}"
+                    class="text-red-500 ml-2"
+                    >Delete</a
                 >
             </td>
         </tr>
