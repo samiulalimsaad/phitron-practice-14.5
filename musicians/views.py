@@ -10,6 +10,17 @@ def index(args):
     return redirect("/musicians")
 
 
+def add_musician(request):
+    if request.method == "POST":
+        form = MusicianForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("musician_list")
+    else:
+        form = MusicianForm()
+    return render(request, "add_musician.html", {"form": form})
+
+
 def musician_list(request):
     musicians = Musician.objects.all()
     return render(request, "musician_list.html", {"musicians": musicians})
